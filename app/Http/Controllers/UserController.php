@@ -8,6 +8,30 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function showCorrectHomepage()
+    {
+        // return auth()->check() ? view('homepage-fade') : view('homepage');
+        if (auth()->check()) {
+            return view('homepage-fade');
+        } else {
+            return view('homepage');
+        }
+    }
+
+    public function login(Request $request)
+    {
+        $incommingFiels = $request->validate([
+            'loginusername' => 'required',
+            'loginpassword' => 'required'
+        ]);
+
+        if (auth()->attempt(['username' => $incommingFiels['loginusername'], 'password' => $incommingFiels['loginpassword']])) {
+            return 'Ok';
+        } else {
+            return 'something went wrong';
+        }
+    }
+
     public function register(Request $request)
     {
         $incommingFiels = $request->validate([
