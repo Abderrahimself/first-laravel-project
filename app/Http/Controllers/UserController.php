@@ -26,9 +26,9 @@ class UserController extends Controller
         ]);
 
         if (auth()->attempt(['username' => $incommingFiels['loginusername'], 'password' => $incommingFiels['loginpassword']])) {
-            return 'Ok';
+            return redirect()->to('/')->with('success', 'You have successfully logged in, enjoy');
         } else {
-            return 'something went wrong';
+            return redirect()->to('/')->with('failure', 'Invalid login, try again ');
         }
     }
 
@@ -42,7 +42,14 @@ class UserController extends Controller
 
         // $incommingFiels['password'] = bcrypt($incommingFiels['password']);
 
-        User::create($incommingFiels);
-        return "Hello from register page";
+        $user = User::create($incommingFiels);
+        auth()->login($user);
+        return redirect()->to('/')->with('success', 'Thank you for creating an account, explore');
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->to('/')->with('success', 'You are now logged out, see you again');
     }
 }

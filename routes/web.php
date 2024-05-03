@@ -3,7 +3,6 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ExampleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +16,6 @@ use App\Http\Controllers\ExampleController;
 */
 
 Route::get('/', [UserController::class, "showCorrectHomepage"]);
-Route::get('/about', [ExampleController::class, "about"]);
 Route::post('/register', [UserController::class, "register"]);
 Route::post('/login', [UserController::class, "login"]);
+Route::post('/logout', [UserController::class, "logout"]);
