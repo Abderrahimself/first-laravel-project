@@ -16,9 +16,11 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [UserController::class, "showCorrectHomepage"]);
-Route::post('/register', [UserController::class, "register"]);
-Route::post('/login', [UserController::class, "login"]);
-Route::post('/logout', [UserController::class, "logout"]);
-Route::get('/create-post', [PostController::class, "showCreateForm"])->name('create-post');
-Route::post('/create-post', [PostController::class, "storeNewPost"])->name('store-post');
+Route::get('/', [UserController::class, "showHomepage"])->name('home')->middleware('auth');
+Route::post('/register', [UserController::class, "register"])->name('register')->middleware('guest');
+Route::get('/login', [UserController::class, "showLoginForm"])->name('login.post')->middleware('guest');
+Route::post('/login', [UserController::class, "login"])->name('login')->middleware('guest');
+Route::post('/logout', [UserController::class, "logout"])->name('logout.post')->middleware('auth');
+Route::get('/create-post', [PostController::class, "showCreateForm"])->name('create.post')->middleware('auth');
+Route::post('/create-post', [PostController::class, "storeNewPost"])->name('store.post')->middleware('auth');
+Route::get('/post/{post}', [PostController::class, "viewSinglePost"])->name('show.single.post')->middleware('auth');

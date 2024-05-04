@@ -8,7 +8,7 @@
                     writing is the key to enjoying the internet again.</p>
             </div>
             <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
-                <form action="/register" method="POST" id="registration-form">
+                <form action="{{ route('register') }}" method="POST" id="registration-form">
                     @csrf
                     <div class="form-group">
                         <label for="username-register" class="text-muted mb-1"><small>Username</small></label>
