@@ -24,3 +24,4 @@ Route::post('/logout', [UserController::class, "logout"])->name('logout.post')->
 Route::get('/create-post', [PostController::class, "showCreateForm"])->name('create.post')->middleware('auth');
 Route::post('/create-post', [PostController::class, "storeNewPost"])->name('store.post')->middleware('auth');
 Route::get('/post/{post}', [PostController::class, "viewSinglePost"])->name('show.single.post')->middleware('auth');
+Route::get('/profile/{user:username}', [UserController::class, 'profile'])->name('show.profile')->middleware('auth');
