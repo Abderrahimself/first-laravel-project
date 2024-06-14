@@ -12,12 +12,34 @@ use Illuminate\Support\Facades\Gate;
 class PostController extends Controller
 {
 
+    public function showEditForm(Post $post)
+    {
+        return view("edit-post", compact("post"));
+    }
+
+    public function update(Post $post, Request $request)
+    {
+        $incomingFields = $request->validate([
+            "title" => "required",
+            "body" => "required"
+        ]);
+
+        $incomingFields['title'] = strip_tags($incomingFields['title']);
+        $incomingFields['body'] = strip_tags($incomingFields['body']);
+
+        $post->update($incomingFields);
+
+        return redirect()->route("show.single.post", $post->id)->with('success', 'Post updated successfully');
+    }
+
     public function delete(Post $post)
     {
-        if (Gate::denies('delete', $post)) {
-            return response('You cannot do that', 403);
-        }
+        // here we used the policy the controler's way
+        // if (Gate::denies('delete', $post)) {
+        //     return response('You cannot do that', 403);
+        // }
 
+        // here we count on using it in the middleware's way
         $post->delete();
         return redirect(route('show.profile', auth()->user()->username))->with('success', 'Post deleted successfully');
     }
