@@ -2,12 +2,26 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class PostController extends Controller
 {
+
+    public function delete(Post $post)
+    {
+        if (Gate::denies('delete', $post)) {
+            return response('You cannot do that', 403);
+        }
+
+        $post->delete();
+        return redirect(route('show.profile', auth()->user()->username))->with('success', 'Post deleted successfully');
+    }
+
     public function showCreateForm()
     {
         return view('create-post');

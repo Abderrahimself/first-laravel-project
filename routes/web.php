@@ -25,3 +25,4 @@ Route::get('/create-post', [PostController::class, "showCreateForm"])->name('cre
 Route::post('/create-post', [PostController::class, "storeNewPost"])->name('store.post')->middleware('auth');
 Route::get('/post/{post}', [PostController::class, "viewSinglePost"])->name('show.single.post')->middleware('auth');
 Route::get('/profile/{user:username}', [UserController::class, 'profile'])->name('show.profile')->middleware('auth');
+Route::delete('/post/{post}', [PostController::class, "delete"])->name('delete.post')->middleware('auth');
