@@ -28,3 +28,6 @@ Route::get('/profile/{user:username}', [UserController::class, 'profile'])->name
 Route::delete('/post/{post}', [PostController::class, "delete"])->name('delete.post')->middleware('auth', 'can:delete,post');
 Route::get('/post/{post}/edit', [PostController::class, "showEditForm"])->name('show.update.form')->middleware('auth', 'can:update,post');
 Route::put('/post/{post}', [PostController::class, "update"])->name("update.post")->middleware('auth', 'can:update,post');
+Route::get('/admins-only', function () {
+    return 'only for admins';
+})->middleware('auth', 'can:visitAdminPages');

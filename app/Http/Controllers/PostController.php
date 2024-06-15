@@ -34,7 +34,7 @@ class PostController extends Controller
 
     public function delete(Post $post)
     {
-        // here we used the policy the controler's way
+        // here we used the policy the controler's way, it should have been cannot but it did not work so i replaced it with this solution
         // if (Gate::denies('delete', $post)) {
         //     return response('You cannot do that', 403);
         // }
