@@ -31,3 +31,5 @@ Route::put('/post/{post}', [PostController::class, "update"])->name("update.post
 Route::get('/admins-only', function () {
     return 'only for admins';
 })->middleware('auth', 'can:visitAdminPages');
+Route::get('/manage-avatar', [UserController::class, 'showAvatarForm'])->name('manage.avatar')->middleware('auth');
+Route::post('/manage-avatar', [UserController::class, 'storeAvatar'])->name('store.avatar')->middleware('auth');

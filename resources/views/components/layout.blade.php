@@ -30,9 +30,12 @@
                     <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip"
                         data-placement="bottom"><i class="fas fa-comment"></i></span>
                     <a href="{{ route('show.profile', ['user' => auth()->user()->username]) }}" class="mr-2">
+                        {{-- @php
+                            $avatar = auth()->user()->avatar;
+                            dd($avatar);
+                        @endphp --}}
                         <img title="My Profile" data-toggle="tooltip" data-placement="bottom"
-                            style="width: 32px; height: 32px; border-radius: 16px"
-                            src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128" />
+                            style="width: 32px; height: 32px; border-radius: 16px" src="{{ auth()->user()->avatar }}" />
                     </a>
 
                     <a class="btn btn-sm btn-success mr-2" href="{{ route('create.post') }}">Create Post</a>

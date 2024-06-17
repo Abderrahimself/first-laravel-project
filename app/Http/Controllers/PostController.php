@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
-
     public function showEditForm(Post $post)
     {
         return view("edit-post", compact("post"));
